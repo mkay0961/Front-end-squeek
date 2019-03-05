@@ -105,7 +105,7 @@ class Controller{
     div.className = "users-container"
     return div
   }
-  
+
   getBody(){
     return document.getElementById('whole-body')
   }
@@ -113,7 +113,7 @@ class Controller{
   renderUser(user){
     let h1 = document.createElement("h1")
     let divCard = document.createElement("div")
-    // divCard.addEventListener('click',()=>{this.specficUser(user)})
+    divCard.addEventListener('click',()=>{this.specficUser(user)})
     divCard.className = "user-card"
     let divCardFrame = document.createElement("div")
     divCardFrame.className = "user-card-frame"
@@ -173,11 +173,57 @@ class Controller{
     this.getBody().innerText = ""
     let h1 = document.createElement("h1")
     h1.innerText = user.first + " " + user.last
-
     let div = this.createUserDiv()
+    let current = this.createCurrentBox(user)
     div.appendChild(h1)
+    div.appendChild(current)
     this.getBody().appendChild(div)
-
     console.log("hi");
   }
+
+  createCurrentBox(user){
+
+    let box = document.createElement("div")
+    let current = document.createElement("h5")
+
+    current.innerText = "Current"
+    let notcurrent = document.createElement("h5")
+    notcurrent.innerText = "Not Current"
+    let ulc = document.createElement("ul")
+    let ulnc = document.createElement("ul")
+    current.appendChild(ulc)
+    notcurrent.appendChild(ulnc)
+
+
+    box.appendChild(current)
+    box.appendChild(notcurrent)
+    user.items.forEach((item)=>{
+      if(item.current === "true"){
+        let li = document.createElement("li")
+        li.innerText = `${item.name}`
+        ulc.appendChild(li)
+        console.log("true",item)
+      }else {
+        let li = document.createElement("li")
+        li.innerText = `${item.name}`
+        ulnc.appendChild(li)
+        console.log("false",item)
+      }
+      })
+
+
+
+    return box
+  }
+
+
+  // <div class="user-card">
+  //   <div class="user-card-frame">
+  //     hi
+  //   </div>
+  // </div>
+
+
+
+
 }
