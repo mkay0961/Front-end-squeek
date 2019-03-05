@@ -6,6 +6,12 @@ class Adapter{
     return fetch(this.baseURL)
                 .then(res => res.json())
   }
+  getIdByUsername(usr){
+    return fetch(`${this.baseURL}/userLogin/${usr}`, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'}
+        }).then(res=>res.json())  
+  }
 
 
 }
