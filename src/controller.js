@@ -1,24 +1,38 @@
 class Controller{
   constructor(){
     this.userAdapter = new Adapter("http://localhost:3000/users")
+    this.itemAdapter = new Adapter("http://localhost:3000/items")
+
   }
 
   start(){
     console.log("starting");
-    let promise = this.userAdapter.getAllUsers()
+    let promise = this.userAdapter.getAll()
     // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((userAray)=>{this.specficUser(userAray[0])})
     this.getUserBtn().addEventListener('click', this.getAllUsers.bind(this))
+    this.getItemBtn().addEventListener('click', this.getAllItems.bind(this))
+
 
 
   }
   getUserBtn(){
     return document.getElementById('users-btn')
   }
+  getItemBtn(){
+    return document.getElementById('items-btn')
+  }
+
   getAllUsers(){
-    let promise = this.userAdapter.getAllUsers()
+    let promise = this.userAdapter.getAll()
     // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((userAray)=>{this.handleArray(userAray)})
+  }
+
+  getAllItems(){
+    let promise = this.itemAdapter.getAll()
+    // promise.then((userAray)=>{this.handleArray(userAray)})
+    promise.then((itemArray)=>{console.log(itemArray)})
   }
   // checkLogin(){
   //   //if logged in
