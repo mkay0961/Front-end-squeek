@@ -1,0 +1,28 @@
+body {
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+    sans-serif;
+  font-weight: 300;
+}
+
+
+#container {
+  width: 1000px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.user-card {
+  float: left;
+  width: 250px;
+  margin: auto;
+}
+.user-card-frame {
+  width: 230px;
+  margin: 10px;
+  background: #D3D3D3;
+  color: #000000
+}
+
+.center-text {
+  text-align: center;
+}
