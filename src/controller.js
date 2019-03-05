@@ -8,12 +8,17 @@ class Controller{
     let promise = this.userAdapter.getAllUsers()
     // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((userAray)=>{this.specficUser(userAray[0])})
-    // this.getUserBtn().addEventListener('click', this.getAllUsers)
+    this.getUserBtn().addEventListener('click', this.getAllUsers.bind(this))
 
 
   }
   getUserBtn(){
     return document.getElementById('users-btn')
+  }
+  getAllUsers(){
+    let promise = this.userAdapter.getAllUsers()
+    // promise.then((userAray)=>{this.handleArray(userAray)})
+    promise.then((userAray)=>{this.handleArray(userAray)})
   }
   // checkLogin(){
   //   //if logged in
@@ -91,7 +96,7 @@ class Controller{
   renderUser(user){
     let h1 = document.createElement("h1")
     let divCard = document.createElement("div")
-    divCard.addEventListener('click',()=>{this.specficUser(user)})
+    // divCard.addEventListener('click',()=>{this.specficUser(user)})
     divCard.className = "user-card"
     let divCardFrame = document.createElement("div")
     divCardFrame.className = "user-card-frame"
