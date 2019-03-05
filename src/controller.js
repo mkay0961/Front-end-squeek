@@ -31,39 +31,46 @@ class Controller{
     // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((itemArray)=>{this.handleItems(itemArray)})
   }
-  // checkLogin(){
-  //   //if logged in
-  //   //call call specficUser(user)
-  //   let userName = document.getElementById('userName');
-  //   let userPw = document.getElementById('userPw');
+  checkLogin(){
+    //if logged in
+    //call call specficUser(user)
+
+    if(localStorage.getItem('name') === null){
+      console.log("not logged in");
+      this.loginPage()
+      // debugger
+    }else if (localStorage.getItem('name') !== null){
+      console.log("logged in");
+      // debugger
+    }
+    //else if not call loginpage()
+
+  }
   //
-  //   if((localStorage.getItem('name') !== userName.value)&& (localStorage.getItem('pw')!==userPw.value)){
-  //     console.log("not logged in");
-  //     this.loginPage()
-  //     debugger
-  //   }else if ((localStorage.getItem('name') === userName.value)&& (localStorage.getItem('pw')===userPw.value)){
-  //     console.log("logged in");
-  //     debugger
-  //   }
-  //   //else if not call loginpage()
-  //
-  // }
-  //
-  // loginPage(){
-  //   //have button to register registerPage()
-  //
-  //   this.getBody().innerText = ""
-  //   this.getBody().innerHTML = `<form id="login-form">
-  //           <input id="userName" type="text" placeholder="Enter Username" value=""/>
-  //           <input id="userPw" type="password" placeholder="Enter Password" value=""/>
-  //           <input id="login_btn" type="submit" value="Login"/>
-  //           <input id="register_btn" type="submit"value="Register"/>
-  //
-  //      </form>`
-  //
-  //      document.getElementById('register_btn').addEventListener('click', this.registerPage.bind(this))
-  //      document.getElementById('login_btn').addEventListener('click',this.checkLogin.bind(this))
-  // }
+  loginPage(){
+    //have button to register registerPage()
+
+    this.getBody().innerText = ""
+    this.getBody().innerHTML = `<form id="login-form">
+            <input id="userName" type="text" placeholder="Enter Username" value=""/>
+            <input id="login_btn" type="submit" value="Login"/>
+            <input id="register_btn" type="submit"value="Register"/>
+
+       </form>`
+
+       // document.getElementById('register_btn').addEventListener('click', this.registerPage.bind(this))
+       document.getElementById('login_btn').addEventListener('click',this.store.bind(this))
+  }
+
+  store(){
+    
+    let username = document.getElementById('userName')
+    let promise = this.userAdapter.getIdByUsername(username)
+    promise.then(id=>console.log(id))
+
+
+  }
+
   //
   //
   //
