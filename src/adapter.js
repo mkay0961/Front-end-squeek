@@ -17,6 +17,11 @@ class Adapter{
     return fetch(`${this.baseURL}/${id}`)
             .then(res=>res.json())
   }
-
-
+  createOne(object){
+    return fetch(this.baseURL, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(object)
+        }).then(res=>res.json())
+  }
 }
