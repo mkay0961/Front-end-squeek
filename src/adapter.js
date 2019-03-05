@@ -7,10 +7,15 @@ class Adapter{
                 .then(res => res.json())
   }
   getIdByUsername(usr){
+    // debugger
     return fetch(`${this.baseURL}/userLogin/${usr}`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'}
-        }).then(res=>res.json())  
+        }).then(res=>res.json())
+  }
+  getOne(id){
+    return fetch(`${this.baseURL}/${id}`)
+            .then(res=>res.json())
   }
 
 

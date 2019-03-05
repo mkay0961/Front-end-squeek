@@ -9,8 +9,8 @@ class Controller{
     let promise = this.userAdapter.getAll()
     // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((userAray)=>{this.specficUser(userAray[0])})
-    this.getUserBtn().addEventListener('click', this.getAllUsers.bind(this))
-    this.getItemBtn().addEventListener('click', this.getAllItems.bind(this))
+    // this.getUserBtn().addEventListener('click', this.getAllUsers.bind(this))
+    // this.getItemBtn().addEventListener('click', this.getAllItems.bind(this))
   }
 
   getUserBtn(){
@@ -18,6 +18,12 @@ class Controller{
   }
   getItemBtn(){
     return document.getElementById('items-btn')
+  }
+  getProBtn(){
+    return document.getElementById('profile-btn')
+  }
+  getLogOutBtn(){
+    return document.getElementById('logOut-btn')
   }
 
   getAllUsers(){
@@ -32,15 +38,17 @@ class Controller{
     promise.then((itemArray)=>{this.handleItems(itemArray)})
   }
   checkLogin(){
+
     //if logged in
     //call call specficUser(user)
-
     if(localStorage.getItem('name') === null){
       console.log("not logged in");
       this.loginPage()
       // debugger
     }else if (localStorage.getItem('name') !== null){
       console.log("logged in");
+      // debugger
+      this.renderProfile()
       // debugger
     }
     //else if not call loginpage()
@@ -62,13 +70,48 @@ class Controller{
        document.getElementById('login_btn').addEventListener('click',this.store.bind(this))
   }
 
-  store(){
-    
+  store(e){
+    e.preventDefault()
     let username = document.getElementById('userName')
-    let promise = this.userAdapter.getIdByUsername(username)
-    promise.then(id=>console.log(id))
+    let promise = this.userAdapter.getIdByUsername(username.value)
+    promise.then((json)=>{
+      if (json.status == 500){
+          this.checkLogin()
+      }else{
+        localStorage.setItem('id', json*7)
+        document.getElementById('login-form').style.display = "none"
+        this.enableBtn()
+        this.getUserBtn().addEventListener('click', this.getAllUsers.bind(this))
+        this.getItemBtn().addEventListener('click', this.getAllItems.bind(this))
+        this.getProBtn().addEventListener('click', this.renderProfile.bind(this))
+        this.getLogOutBtn().addEventListener('click', this.logout.bind(this))
+        this.renderProfile()
 
+      }
+  })
+  }
 
+  logout(){
+    localStorage.clear()
+    this.checkLogin()
+    this.getUserBtn().disabled = true
+    this.getItemBtn().disabled = true
+    this.getProBtn().disabled = true
+    this.getLogOutBtn().disabled = true
+  }
+  enableBtn(){
+    this.getUserBtn().disabled = false
+    this.getItemBtn().disabled = false
+    this.getProBtn().disabled = false
+    this.getLogOutBtn().disabled = false
+  }
+
+  renderProfile(){
+    this.getBody().innerText = ""
+    let id = (parseInt(localStorage.getItem('id'))/7)
+    let promise = this.userAdapter.getOne(id)
+    // document.getElementById('login-form').style.display = "none"
+    promise.then((user)=> {this.specficUser(user)})
   }
 
   //
