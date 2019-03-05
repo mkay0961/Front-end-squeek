@@ -8,8 +8,12 @@ class Controller{
     let promise = this.userAdapter.getAllUsers()
     // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((userAray)=>{this.specficUser(userAray[0])})
-    
+    // this.getUserBtn().addEventListener('click', this.getAllUsers)
 
+
+  }
+  getUserBtn(){
+    return document.getElementById('users-btn')
   }
   // checkLogin(){
   //   //if logged in
