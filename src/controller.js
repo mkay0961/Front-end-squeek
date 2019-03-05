@@ -2,7 +2,6 @@ class Controller{
   constructor(){
     this.userAdapter = new Adapter("http://localhost:3000/users")
     this.itemAdapter = new Adapter("http://localhost:3000/items")
-
   }
 
   start(){
@@ -12,10 +11,8 @@ class Controller{
     promise.then((userAray)=>{this.specficUser(userAray[0])})
     this.getUserBtn().addEventListener('click', this.getAllUsers.bind(this))
     this.getItemBtn().addEventListener('click', this.getAllItems.bind(this))
-
-
-
   }
+
   getUserBtn(){
     return document.getElementById('users-btn')
   }
@@ -32,7 +29,7 @@ class Controller{
   getAllItems(){
     let promise = this.itemAdapter.getAll()
     // promise.then((userAray)=>{this.handleArray(userAray)})
-    promise.then((itemArray)=>{console.log(itemArray)})
+    promise.then((itemArray)=>{this.handleItems(itemArray)})
   }
   // checkLogin(){
   //   //if logged in
@@ -98,11 +95,17 @@ class Controller{
     array.forEach(this.renderUser.bind(this))
   }
 
+  handleItems(array){
+    this.getBody().innerText = ""
+    array.forEach(this.renderItems.bind(this))
+  }
+
   createUserDiv(){
     let div = document.createElement("div")
     div.className = "users-container"
     return div
   }
+  
   getBody(){
     return document.getElementById('whole-body')
   }
@@ -122,6 +125,50 @@ class Controller{
     this.getBody().appendChild(div)
   }
 
+  renderItems(item){
+    let name = document.createElement("h1")
+    let price = document.createElement("h1")
+    let divCard = document.createElement("div")
+    divCard.addEventListener('click',()=>{this.specficItem(item)})
+    divCard.className = "user-card"
+    let divCardFrame = document.createElement("div")
+    divCardFrame.className = "user-card-frame"
+    name.innerText = item.name.replace(/\b\w/g, l => l.toUpperCase()) //capitalizes name
+    price.innerText = "$"+item.price.toFixed(2) //rounds to second decimal
+    divCardFrame.appendChild(name)
+    divCardFrame.appendChild(price)
+    divCard.appendChild(divCardFrame)
+    let div = this.createUserDiv()
+    if (!item.user.length) {
+      divCard.style.display = "none"
+    }
+    div.appendChild(divCard)
+    this.getBody().appendChild(div)
+  }
+
+  specficItem(item){
+    this.getBody().innerText = ""
+    let name = document.createElement("h1")
+    name.innerText = item.name.replace(/\b\w/g, l => l.toUpperCase())
+    let price = document.createElement("h1")
+    price.innerText = "$"+item.price.toFixed(2)
+
+    let div = this.createUserDiv()
+    div.appendChild(name)
+    div.appendChild(price)
+    if (item.user.length) {
+      let ul = document.createElement('ul')
+      item.user.forEach((user)=>{
+        let li = document.createElement('li')
+        li.innerHTML = `${user.review + " - " + user.first + " " + user.last}`
+        ul.appendChild(li)
+      })
+    div.appendChild(ul)
+    }
+    this.getBody().appendChild(div)
+    console.log("hi");
+  }
+
   specficUser(user){
     this.getBody().innerText = ""
     let h1 = document.createElement("h1")
@@ -133,14 +180,4 @@ class Controller{
 
     console.log("hi");
   }
-
-  // <div class="user-card">
-  //   <div class="user-card-frame">
-  //     hi
-  //   </div>
-  // </div>
-
-
-
-
 }
