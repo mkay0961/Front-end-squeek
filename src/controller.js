@@ -16,19 +16,14 @@ class Controller{
   getLogOutBtn(){
     return document.getElementById('logOut-btn')
   }
-
   getAllUsers(){
     let promise = this.userAdapter.getAll()
-    // promise.then((userAray)=>{this.handleArray(userAray)})
-    promise.then((userAray)=>{this.handleArray(userAray)})
+    promise.then((userArray)=>{this.handleArray(userArray)})
   }
-
   getAllItems(){
     let promise = this.itemAdapter.getAll()
-    // promise.then((userAray)=>{this.handleArray(userAray)})
     promise.then((itemArray)=>{this.handleItems(itemArray)})
   }
-
   getBody(){
     return document.getElementById('whole-body')
   }
@@ -42,7 +37,6 @@ class Controller{
       console.log("logged in");
       this.renderProfile()}
   }
-
   loginPage(){
     this.getBody().innerText = ""
     this.getBody().innerHTML =
@@ -73,13 +67,11 @@ class Controller{
         this.getLogOutBtn().addEventListener('click', this.logout.bind(this))
         this.renderProfile()}})
   }
-
   logout(){
     localStorage.clear()
     this.checkLogin()
     this.toggleBtn(true)
   }
-
   toggleBtn(input){
     this.getUserBtn().disabled = input
     this.getItemBtn().disabled = input
@@ -98,7 +90,6 @@ class Controller{
       </form>`
     document.getElementById('register-form').addEventListener('submit',(e)=>{ this.newAccount(e)})
   }
-
   newAccount(e){
     e.preventDefault()
     let first = document.getElementById('first').value
@@ -114,18 +105,15 @@ class Controller{
     let promise = this.userAdapter.getOne(id)
     promise.then((user)=> {this.specificUser(user)})
   }
-
   handleArray(array){
     this.getBody().innerText = ""
     array.forEach(this.renderUser.bind(this))
   }
-
   createUserDiv(){
     let div = document.createElement("div")
     div.className = "users-container"
     return div
   }
-
   renderUser(user){
     let h1 = document.createElement("h1")
     let divCard = document.createElement("div")
@@ -140,7 +128,6 @@ class Controller{
     div.appendChild(divCard)
     this.getBody().appendChild(div)
   }
-
   specificUser(user){
     this.getBody().innerText = ""
     let h1 = document.createElement("h1")
@@ -157,7 +144,6 @@ class Controller{
       div.appendChild(button)}
     this.getBody().appendChild(div)
   }
-
   createCurrentBox(user){
     let box = document.createElement("div")
     let current = document.createElement("h5")
@@ -193,7 +179,6 @@ class Controller{
     this.getBody().innerText = ""
     array.forEach(this.renderItems.bind(this))
   }
-
   renderItems(item){
     let name = document.createElement("h1")
     let price = document.createElement("h1")
@@ -212,8 +197,7 @@ class Controller{
       divCard.style.display = "none"}
     div.appendChild(divCard)
     this.getBody().appendChild(div)
-}
-
+  }
   specificItem(item){
     this.getBody().innerText = ""
     let name = document.createElement("h1")
@@ -234,7 +218,6 @@ class Controller{
     }
     this.getBody().appendChild(div)
   }
-
   itemForm(user_id){
     this.getBody().innerText = ""
     this.getBody().innerHTML =
@@ -246,7 +229,6 @@ class Controller{
       </form>`
     document.getElementById('item-form').addEventListener('submit',(e)=>{ this.newItem(e, user_id)})
   }
-
   newItem(e, user_id){
     e.preventDefault()
     let name = document.getElementById('name').value
@@ -255,7 +237,6 @@ class Controller{
     let data = this.itemAdapter.createOne({name: name, price: price, review: review, user_id: user_id})
     data.then(()=>this.renderProfile())
   }
-
   deleteReview(){
     debugger
   }
