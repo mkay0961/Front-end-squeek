@@ -24,4 +24,11 @@ class Adapter{
       body: JSON.stringify(object)
     }).then(res=>res.json())
   }
+  editCurrent(item_id, user_id, current){
+      return fetch(`${this.baseURL}/${user_id}/items/${item_id}`, {
+        method: "PATCH",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({current: current})
+      }).then(res=>res.json())
+  }
 }
