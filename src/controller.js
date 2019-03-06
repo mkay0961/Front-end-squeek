@@ -53,6 +53,7 @@ class Controller{
   store(e){
     e.preventDefault()
     let username = document.getElementById('userName')
+    if(username.value !== ""){
     let promise = this.userAdapter.getIdByUsername(username.value)
     promise.then((json)=>{
       if (json.status == 500){
@@ -66,6 +67,7 @@ class Controller{
         this.getProBtn().addEventListener('click', this.renderProfile.bind(this))
         this.getLogOutBtn().addEventListener('click', this.logout.bind(this))
         this.renderProfile()}})
+    }
   }
   logout(){
     localStorage.clear()
@@ -194,7 +196,7 @@ class Controller{
         divCardFrame.appendChild(button)
 
       }
-        ulc.appendChild(divCard)
+        ulc.appendChild(divCardFrame)
         console.log("true",item)}
       else {
         let divCard = document.createElement("div")
@@ -204,7 +206,7 @@ class Controller{
         let name = document.createElement("p")
         name.innerText = `${item.name}` //capitalizes name
         divCardFrame.appendChild(name)
-        divCard.appendChild(divCardFrame)
+        divCardFrame.appendChild(divCard)
 
       if (user.id === (localStorage.id/7)) {
 
@@ -227,8 +229,10 @@ class Controller{
         divCardFrame.appendChild(linebreak);
         divCardFrame.appendChild(button)
       }
-        ulnc.appendChild(divCard)
-        }
+      ulnc.className ="not_current-container"
+      ulc.className ="current-container"
+      ulnc.appendChild(divCardFrame)
+      }
 
       })
     return box

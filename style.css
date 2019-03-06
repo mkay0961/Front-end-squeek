@@ -28,3 +28,13 @@ body {
 .center-text {
   text-align: center;
 }
+.not_current-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.current-container{
+  display: flex;
+  flex-wrap: wrap;
+
+}
