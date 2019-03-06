@@ -164,26 +164,42 @@ class Controller{
     current.innerText = "Current"
     let notcurrent = document.createElement("h5")
     notcurrent.innerText = "Not Current"
-    let ulc = document.createElement("ul")
-    let ulnc = document.createElement("ul")
+    let ulc = document.createElement("div")
+    let ulnc = document.createElement("div")
     current.appendChild(ulc)
     notcurrent.appendChild(ulnc)
     box.appendChild(current)
     box.appendChild(notcurrent)
     user.items.forEach((item)=>{
       if(item.current === "true"){
-  // make item cards instead of list
-        // divCard.className = "user-card"
-        // let divCardFrame = document.createElement("div")
-        // divCardFrame.className = "user-card-frame"
-        let li = document.createElement("li")
-        li.innerText = `${item.name}`
-        ulc.appendChild(li)
+        let divCard = document.createElement("div")
+        divCard.className = "user-card"
+        let divCardFrame = document.createElement("div")
+        divCardFrame.className = "user-card-frame"
+        let name = document.createElement("p")
+        name.innerText = `${item.name}` //capitalizes name
+        divCardFrame.appendChild(name)
+        divCard.appendChild(divCardFrame)
+        let button = document.createElement("button")
+        button.className = "btn btn-outline-danger"
+        button.innerText = "Delete Item"
+        divCardFrame.appendChild(button)
+        ulc.appendChild(divCard)
         console.log("true",item)}
       else {
-        let li = document.createElement("li")
-        li.innerText = `${item.name}`
-        ulnc.appendChild(li)
+        let divCard = document.createElement("div")
+        divCard.className = "user-card"
+        let divCardFrame = document.createElement("div")
+        divCardFrame.className = "user-card-frame"
+        let name = document.createElement("p")
+        name.innerText = `${item.name}` //capitalizes name
+        divCardFrame.appendChild(name)
+        divCard.appendChild(divCardFrame)
+        let button = document.createElement("button")
+        button.className = "btn btn-outline-danger"
+        button.innerText = "Delete Item"
+        divCardFrame.appendChild(button)
+        ulnc.appendChild(divCard)
         console.log("false",item)}})
     return box
   }
