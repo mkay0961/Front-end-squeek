@@ -152,9 +152,9 @@ class Controller{
   createCurrentBox(user){
     let box = document.createElement("div")
     let current = document.createElement("h5")
-    current.innerText = "Current"
+    current.innerText = "Current Items"
     let notcurrent = document.createElement("h5")
-    notcurrent.innerText = "Not Current"
+    notcurrent.innerText = "Past Items"
     let ulc = document.createElement("div")
     let ulnc = document.createElement("div")
     current.appendChild(ulc)
@@ -191,7 +191,7 @@ class Controller{
         button.addEventListener('click', ()=>{
           this.deleteItem(user.id, item.item_id).bind(this)
         })
-        button.className = "btn btn-outline-danger"
+        button.className = "btn btn-outline-danger text-center"
         button.innerText = "Delete Item"
         divCardFrame.appendChild(button)
 

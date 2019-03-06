@@ -4,6 +4,13 @@ body {
   font-weight: 300;
 }
 
+#profile-btn {
+  margin-right: 10px;
+}
+
+#items-btn {
+  margin-right: 10px;
+}
 
 #container {
   width: 1000px;
