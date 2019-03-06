@@ -169,6 +169,8 @@ class Controller{
         name.innerText = `${item.name}` //capitalizes name
         divCardFrame.appendChild(name)
         divCard.appendChild(divCardFrame)
+      if (user.id === (localStorage.id/7)) {
+
         let current = document.createElement("input")
         current.setAttribute("type", "checkbox")
         let currentLabel = document.createElement("label")
@@ -187,6 +189,8 @@ class Controller{
         button.className = "btn btn-outline-danger"
         button.innerText = "Delete Item"
         divCardFrame.appendChild(button)
+
+      }
         ulc.appendChild(divCard)
         console.log("true",item)}
       else {
@@ -198,6 +202,9 @@ class Controller{
         name.innerText = `${item.name}` //capitalizes name
         divCardFrame.appendChild(name)
         divCard.appendChild(divCardFrame)
+
+      if (user.id === (localStorage.id/7)) {
+
         let button = document.createElement("button")
         // button.id = `del-item-${item.item_id}`
         button.addEventListener('click', ()=>{
@@ -216,6 +223,7 @@ class Controller{
         let linebreak = document.createElement("br");
         divCardFrame.appendChild(linebreak);
         divCardFrame.appendChild(button)
+      }
         ulnc.appendChild(divCard)
         }
 
