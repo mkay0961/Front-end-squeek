@@ -169,6 +169,16 @@ class Controller{
         name.innerText = `${item.name}` //capitalizes name
         divCardFrame.appendChild(name)
         divCard.appendChild(divCardFrame)
+        let current = document.createElement("input")
+        current.setAttribute("type", "checkbox")
+        let currentLabel = document.createElement("label")
+        currentLabel.innerText = "Current?"
+        current.checked = JSON.parse(item.current)
+        current.addEventListener('change', ()=>this.fetchCheck(item.item_id,user.id,item.current).bind(this))
+        divCardFrame.appendChild(currentLabel)
+        divCardFrame.appendChild(current)
+        let linebreak = document.createElement("br");
+        divCardFrame.appendChild(linebreak);
         let button = document.createElement("button")
         // button.id = `del-item-${item.item_id}`
         button.addEventListener('click', ()=>{
@@ -195,12 +205,21 @@ class Controller{
         })
         button.className = "btn btn-outline-danger"
         button.innerText = "Delete Item"
+        let current = document.createElement("input")
+        current.setAttribute("type", "checkbox")
+        let currentLabel = document.createElement("label")
+        currentLabel.innerText = "Current?"
+        current.checked = JSON.parse(item.current)
+        current.addEventListener('change', ()=>this.fetchCheck(item.item_id,user.id,item.current).bind(this))
+        divCardFrame.appendChild(currentLabel)
+        divCardFrame.appendChild(current)
+        let linebreak = document.createElement("br");
+        divCardFrame.appendChild(linebreak);
         divCardFrame.appendChild(button)
         ulnc.appendChild(divCard)
         }
 
       })
-
     return box
   }
 
@@ -267,8 +286,17 @@ class Controller{
     let data = this.itemAdapter.createOne({name: name, price: price, review: review, user_id: user_id})
     data.then(()=>this.renderProfile())
   }
+
   deleteItem(userId, itemId){
     let promise = this.userAdapter.deleteItem(userId, itemId)
     promise.then(()=>{this.renderProfile()})
   }
+
+  fetchCheck(item_id, user_id, current){
+      let new_current = !JSON.parse(current)
+      let promise = this.userAdapter.editCurrent(item_id,user_id,new_current)
+      promise.then(()=>this.renderProfile())
+  }
+
+
 }
