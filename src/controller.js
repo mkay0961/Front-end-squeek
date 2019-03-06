@@ -156,7 +156,10 @@ class Controller{
     notcurrent.appendChild(ulnc)
     box.appendChild(current)
     box.appendChild(notcurrent)
+
     user.items.forEach((item)=>{
+      console.log(user);
+      // debugger
       if(item.current === "true"){
         let divCard = document.createElement("div")
         divCard.className = "user-card"
@@ -167,6 +170,10 @@ class Controller{
         divCardFrame.appendChild(name)
         divCard.appendChild(divCardFrame)
         let button = document.createElement("button")
+        // button.id = `del-item-${item.item_id}`
+        button.addEventListener('click', ()=>{
+          this.deleteItem(user.id, item.item_id).bind(this)
+        })
         button.className = "btn btn-outline-danger"
         button.innerText = "Delete Item"
         divCardFrame.appendChild(button)
@@ -182,11 +189,18 @@ class Controller{
         divCardFrame.appendChild(name)
         divCard.appendChild(divCardFrame)
         let button = document.createElement("button")
+        // button.id = `del-item-${item.item_id}`
+        button.addEventListener('click', ()=>{
+          this.deleteItem(user.id, item.item_id).bind(this)
+        })
         button.className = "btn btn-outline-danger"
         button.innerText = "Delete Item"
         divCardFrame.appendChild(button)
         ulnc.appendChild(divCard)
-        console.log("false",item)}})
+        }
+
+      })
+
     return box
   }
 
@@ -253,7 +267,8 @@ class Controller{
     let data = this.itemAdapter.createOne({name: name, price: price, review: review, user_id: user_id})
     data.then(()=>this.renderProfile())
   }
-  deleteReview(){
-    debugger
+  deleteItem(userId, itemId){
+    let promise = this.userAdapter.deleteItem(userId, itemId)
+    promise.then(()=>{this.renderProfile()})
   }
 }

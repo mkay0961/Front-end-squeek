@@ -24,4 +24,11 @@ class Adapter{
       body: JSON.stringify(object)
     }).then(res=>res.json())
   }
+  deleteItem(userId, itemId){
+    return fetch(`${this.baseURL}/${userId}/items/${itemId}`,{
+        method: "DELETE"
+    })
+              .then(res => res.json())
+
+  }
 }
