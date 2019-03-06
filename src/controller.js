@@ -131,17 +131,20 @@ class Controller{
   specificUser(user){
     this.getBody().innerText = ""
     let h1 = document.createElement("h1")
-    h1.innerText = user.first + " " + user.last
     let div = this.createUserDiv()
-    let current = this.createCurrentBox(user)
     div.appendChild(h1)
-    div.appendChild(current)
+    h1.innerText = user.first + " " + user.last
     if (user.id === (localStorage.id/7)) {
       let button = document.createElement('button')
       button.className = "btn btn-outline-dark"
       button.addEventListener('click',()=>{this.itemForm(user.id)})
       button.innerText = "Add Item"
-      div.appendChild(button)}
+      div.appendChild(button)
+    }
+    let current = this.createCurrentBox(user)
+    // div.appendChild(h1)
+    div.appendChild(current)
+
     this.getBody().appendChild(div)
   }
   createCurrentBox(user){
