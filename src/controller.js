@@ -157,24 +157,26 @@ class Controller{
   }
   createCurrentBox(user){
     let box = document.createElement("div")
-    let current = document.createElement("h3")
-    current.className = "center-text"
-    current.innerText = "Current Items"
+    let currentItems = document.createElement("h3")
+    currentItems.className = "center-text"
+    currentItems.innerText = "Current Items"
     let notcurrent = document.createElement("h3")
     notcurrent.className = "center-text"
     notcurrent.innerText = "Past Items"
     let ulc = document.createElement("div")
     let ulnc = document.createElement("div")
-    current.appendChild(ulc)
+    ulnc.className = "not-current-container"
+    ulc.className = "current-container"
+    currentItems.appendChild(ulc)
     notcurrent.appendChild(ulnc)
-    box.appendChild(current)
+    box.appendChild(currentItems)
     box.appendChild(notcurrent)
     user.items.forEach((item)=>{
       if(item.current === "true"){
         let divCard = document.createElement("div")
-        divCard.className = "user-card"
+        divCard.className = "item-card"
         let divCardFrame = document.createElement("div")
-        divCardFrame.className = "user-card-frame"
+        divCardFrame.className = "item-card-frame"
         let name = document.createElement("p")
         name.innerText = `${item.name.replace(/\b\w/g, l => l.toUpperCase())}`
         let price = document.createElement("p")
@@ -187,17 +189,6 @@ class Controller{
         divCardFrame.appendChild(price)
         divCardFrame.appendChild(divCard)
       if (user.id === (localStorage.id/7)) {
-
-        let current = document.createElement("input")
-        current.setAttribute("type", "checkbox")
-        let currentLabel = document.createElement("label")
-        currentLabel.innerText = "Current?"
-        current.checked = JSON.parse(item.current)
-        current.addEventListener('change', ()=>this.fetchCheck(item.item_id,user.id,item.current).bind(this))
-        divCardFrame.appendChild(currentLabel)
-        divCardFrame.appendChild(current)
-        let linebreak = document.createElement("br");
-        divCardFrame.appendChild(linebreak);
         let button = document.createElement("button")
         // button.id = `del-item-${item.item_id}`
         button.addEventListener('click', ()=>{
@@ -205,15 +196,26 @@ class Controller{
         })
         button.className = "btn btn-outline-danger text-center"
         button.innerText = "Delete Item"
+
+        let current = document.createElement("input")
+        current.setAttribute("type", "checkbox")
+        let currentLabel = document.createElement("label")
+        currentLabel.innerText = "Current?"
+        current.checked = JSON.parse(item.current)
+        current.addEventListener('change', ()=>this.fetchCheck(item.item_id,user.id,item.current).bind(this))
+        divCardFrame.appendChild(currentLabel)
+        divCardFrame.appendChild(current)
+        let linebreak = document.createElement("br");
+        divCardFrame.appendChild(linebreak);
         divCardFrame.appendChild(button)
 
       }
         ulc.appendChild(divCardFrame)}
       else {
         let divCard = document.createElement("div")
-        divCard.className = "user-card"
+        divCard.className = "item-card"
         let divCardFrame = document.createElement("div")
-        divCardFrame.className = "user-card-frame"
+        divCardFrame.className = "item-card-frame"
         let name = document.createElement("p")
         name.innerText = `${item.name.replace(/\b\w/g, l => l.toUpperCase())}`
         let price = document.createElement("p")
@@ -225,15 +227,14 @@ class Controller{
         divCardFrame.appendChild(image)
         divCardFrame.appendChild(price)
         divCardFrame.appendChild(divCard)
-
       if (user.id === (localStorage.id/7)) {
-
         let button = document.createElement("button")
         button.addEventListener('click', ()=>{
           this.deleteItem(user.id, item.item_id).bind(this)
         })
         button.className = "btn btn-outline-danger"
         button.innerText = "Delete Item"
+
         let current = document.createElement("input")
         current.setAttribute("type", "checkbox")
         let currentLabel = document.createElement("label")
@@ -246,8 +247,6 @@ class Controller{
         divCardFrame.appendChild(linebreak);
         divCardFrame.appendChild(button)
       }
-      ulnc.className ="not-current-container"
-      ulc.className ="current-container"
       ulnc.appendChild(divCardFrame)
       }
 
@@ -255,18 +254,49 @@ class Controller{
     return box
   }
 
-  // filterDove(){
-  //   this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{
-  //     if (!div.children[0].innerText.includes("Dove"))
-  //     {div.style.display = "none"}})
-  // }
+  filterDove(e){
+    e.preventDefault()
+    if (document.getElementById('filter_btn').value === "Filter Off") {
+      this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{div.style.display = "block"})
+      document.getElementById('filter_btn').value = "Filter"
+    } else {
+    let attribute = document.getElementById('filter-select').selectedOptions[0].value;
+    this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{
+      if (!div.dataset.keywords.includes(attribute)) {
+        div.style.display = "none";
+        document.getElementById('filter_btn').value = "Filter Off"
+      }})
+    }
+   }
 
   //render item stuff
   handleItems(array){
     this.getBody().innerText = ""
-    // let filter = document.createElement("button")
-    // filter.innerText = "Filter"
-    // filter.addEventListener('click', this.filterDove.bind(this))
+let filter = document.createElement('div')
+filter.innerHTML =
+`<form id="filter-form">
+    <select id="filter-select">
+      <option value="curly">Curly Hair</option>
+      <option value="straight">Straight Hair</option>
+      <option value="wavy">Wavy Hair</option>
+      <option value="dryskin">Dry Skin</option>
+      <option value="acne">Acne Prone Skin</option>
+      <option value="oilyskin">Oily Skin</option>
+      <option value="combo">Combination Skin</option>
+      <option value="normalskin">Normal Skin</option>
+      <option value="thin">Thin Hair</option>
+      <option value="thick">Thick Hair</option>
+      <option value="normalhair">Normal Hair</option>
+      <option value="flat">Flat Hair</option>
+      <option value="damaged">Damaged Hair</option>
+      <option value="voluminous">Voluminous Hair</option>
+      <option value="oilyskin">Oily Hair</option>
+      <option value="dryhair">Dry Hair</option>
+    </select>
+    <input id="filter_btn" type="submit" value="Filter" class="btn btn-outline-primary"/>
+  </form><br><br>`
+  this.getBody().appendChild(filter)
+    filter.addEventListener('submit', (e)=>this.filterDove(e).bind(this))
     // this.getBody().appendChild(filter)
     array.forEach(this.renderItems.bind(this))
   }
@@ -275,9 +305,10 @@ class Controller{
     let price = document.createElement("h1")
     let divCard = document.createElement("div")
     divCard.addEventListener('click',()=>{this.specificItem(item)})
-    divCard.className = "user-card"
+    divCard.className = "item-card"
     let divCardFrame = document.createElement("div")
-    divCardFrame.className = "user-card-frame"
+    divCardFrame.className = "item-card-frame"
+    divCardFrame.dataset.keywords = item.keywords
     name.innerText = item.name.replace(/\b\w/g, l => l.toUpperCase()) //capitalizes name
     price.innerText = "$"+item.price.toFixed(2) //rounds to second decimal
     let image = document.createElement('img')
@@ -339,6 +370,9 @@ class Controller{
            <option value="thin">Thin Hair</option>
            <option value="thick">Thick Hair</option>
            <option value="normalhair">Normal Hair</option>
+           <option value="flat">Flat Hair</option>
+           <option value="damaged">Damaged Hair</option>
+           <option value="voluminous">Voluminous Hair</option>
            <option value="oilyskin">Oily Hair</option>
            <option value="dryhair">Dry Hair</option>
         </select><br><br>
@@ -358,15 +392,12 @@ class Controller{
   }
 
   updateItemKeywords(json, keywords) {
-
     let item_id = json.id
     let keywordsarray = Array.from(keywords).map((option)=>option.value)
     let data = {keywords: keywordsarray.join(" ")}
     let promise = this.itemAdapter.editItem(item_id, data)
     promise.then((json)=>{console.log(json)})
     // Array.from(keywords).forEach((option)=>Item.find(item_id).dataset.keywords << option.value))
-
-
     // item.dataset.keywords << dropdown attributes
     // patch item.keywords add string
   }
