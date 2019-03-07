@@ -212,8 +212,7 @@ class Controller{
         divCardFrame.appendChild(button)
 
       }
-        ulc.appendChild(divCardFrame)
-        console.log("true",item)}
+        ulc.appendChild(divCardFrame)}
       else {
         let divCard = document.createElement("div")
         divCard.className = "user-card"
@@ -260,9 +259,19 @@ class Controller{
     return box
   }
 
+  // filterDove(){
+  //   this.getBody().querySelectorAll('.user-card-frame').forEach((div)=>{
+  //     if (!div.children[0].innerText.includes("Dove"))
+  //     {div.style.display = "none"}})
+  // }
+  
   //render item stuff
   handleItems(array){
     this.getBody().innerText = ""
+    // let filter = document.createElement("button")
+    // filter.innerText = "Filter"
+    // filter.addEventListener('click', this.filterDove.bind(this))
+    // this.getBody().appendChild(filter)
     array.forEach(this.renderItems.bind(this))
   }
   renderItems(item){
