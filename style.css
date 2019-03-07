@@ -1,7 +1,17 @@
+html, body {min-height: 100%;}
 body {
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
     sans-serif;
   font-weight: 300;
+
+  background-image: url("https://us.123rf.com/450wm/monticello/monticello1708/monticello170800239/84490130-plastic-bottles-of-body-care-and-beauty-products-.jpg?ver=6");
+  background-color: #cccccc;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
 }
 
 #profile-btn {
@@ -48,6 +58,14 @@ body {
   color: #000000;
   text-align: center;
 }
+label {
+    background: lightblue;
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: black;
+    opacity: 1;
+    
+}
 
 .center-text {
   text-align: center;
@@ -89,6 +107,32 @@ padding: 1rem; */
 #login_btn {
 margin-left: 21px;
 
+}
+.h1, h1 {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.h3, h3 {
+    font-size: 1.75rem;
+    color: black;
+    background: lightblue;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+
+ul {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    background: lightblue;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+
+}
+li{
+  color: black;
+  opacity: 1;
 }
 
 #register_btn {

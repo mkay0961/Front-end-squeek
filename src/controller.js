@@ -42,7 +42,7 @@ class Controller{
     this.getBody().innerHTML =
       `<form id="login-form">
           <input id="userName" type="text" placeholder="Enter Username" /><br><br>
-          <input id="login_btn" type="submit" value="Login" class="btn btn-outline-dark"/>
+          <input id="login_btn" type="submit" value="Login" class="btn btn-outline-light"/>
           <input id="register_btn" type="submit"value="Register" class="btn btn-outline-success"/>
         </form>`
     document.getElementById('register_btn').addEventListener('click', this.registerPage.bind(this))
@@ -145,7 +145,7 @@ class Controller{
     h1.innerText = user.first + " " + user.last
     if (user.id === (localStorage.id/7)) {
       let button = document.createElement('button')
-      button.className = "btn btn-outline-dark"
+      button.className = "btn btn-outline-light"
       button.addEventListener('click',()=>{this.itemForm(user.id)})
       button.innerText = "Add Item"
       div.appendChild(button)
@@ -201,6 +201,7 @@ class Controller{
         current.setAttribute("type", "checkbox")
         let currentLabel = document.createElement("label")
         currentLabel.innerText = "Current?"
+
         current.checked = JSON.parse(item.current)
         current.addEventListener('change', ()=>this.fetchCheck(item.item_id,user.id,item.current).bind(this))
         divCardFrame.appendChild(currentLabel)
@@ -351,13 +352,13 @@ filter.innerHTML =
     this.getBody().innerText = ""
     this.getBody().innerHTML =
       `<form id="item-form">
-      <label>Item</label><br>
+      <label class= "badge badge-secondary">Item</label><br>
         <input id="name" type="text" placeholder="Item Name" value=""/><br><br>
-        <label>Price</label><br>
+        <label class= "badge badge-secondary">Price</label><br>
         <input id="price" type="text" placeholder="Item Price" value=""/><br><br>
-        <label>Write a Review</label><br>
+        <label class= "badge badge-secondary">Write a Review</label><br>
         <textarea id="review" placeholder="Review" type="text"></textarea><br><br>
-        <label>Select Relevant Attributes</label><br>
+        <label class= "badge badge-secondary">Select Relevant Attributes</label><br>
         <select multiple id="keywords">
            <option value="curly">Curly Hair</option>
            <option value="straight">Straight Hair</option>
@@ -376,7 +377,7 @@ filter.innerHTML =
            <option value="oilyskin">Oily Hair</option>
            <option value="dryhair">Dry Hair</option>
         </select><br><br>
-        <input id="add_item_btn" type="submit" value="Add Review" class="btn btn-outline-success"/>
+        <input id="add_item_btn" type="submit" value="Add Item" class="btn btn-outline-success"/>
       </form>`
     document.getElementById('item-form').addEventListener('submit',(e)=>{ this.newItem(e, user_id)})
   }
