@@ -182,7 +182,7 @@ class Controller{
         let price = document.createElement("p")
         price.innerText = `$${item.price.toFixed(2)}`
         let image = document.createElement('img')
-        image.src = "https://cdn5.vectorstock.com/i/1000x1000/18/34/shampoo-and-soap-flat-icon-on-white-background-vector-13621834.jpg"
+        image.src = item.image
         image.className = "item-image"
         divCardFrame.appendChild(name)
         divCardFrame.appendChild(image)
@@ -221,7 +221,7 @@ class Controller{
         let price = document.createElement("p")
         price.innerText = `$${item.price.toFixed(2)}`
         let image = document.createElement('img')
-        image.src = "https://cdn5.vectorstock.com/i/1000x1000/18/34/shampoo-and-soap-flat-icon-on-white-background-vector-13621834.jpg"
+        image.src = item.image
         image.className = "item-image"
         divCardFrame.appendChild(name)
         divCardFrame.appendChild(image)
@@ -312,7 +312,7 @@ filter.innerHTML =
     name.innerText = item.name.replace(/\b\w/g, l => l.toUpperCase()) //capitalizes name
     price.innerText = "$"+item.price.toFixed(2) //rounds to second decimal
     let image = document.createElement('img')
-    image.src = "https://cdn5.vectorstock.com/i/1000x1000/18/34/shampoo-and-soap-flat-icon-on-white-background-vector-13621834.jpg"
+    image.src = item.image
     image.className = "item-image"
     divCardFrame.appendChild(name)
     divCardFrame.appendChild(image)
