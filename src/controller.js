@@ -41,7 +41,7 @@ class Controller{
     this.getBody().innerText = ""
     this.getBody().innerHTML =
       `<form id="login-form">
-          <input id="userName" type="text" placeholder="Enter Username" value=""/>
+          <input id="userName" type="text" placeholder="Enter Username" /><br><br>
           <input id="login_btn" type="submit" value="Login" class="btn btn-outline-dark"/>
           <input id="register_btn" type="submit"value="Register" class="btn btn-outline-success"/>
         </form>`
@@ -264,7 +264,7 @@ class Controller{
   //     if (!div.children[0].innerText.includes("Dove"))
   //     {div.style.display = "none"}})
   // }
-  
+
   //render item stuff
   handleItems(array){
     this.getBody().innerText = ""
