@@ -11,6 +11,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  background-attachment: fixed;
 
 }
 
@@ -69,7 +70,7 @@ label {
     margin-bottom: .5rem;
     color: black;
     opacity: 1;
-    
+
 }
 
 .center-text {
