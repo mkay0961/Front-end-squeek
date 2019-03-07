@@ -25,11 +25,12 @@ body {
 }
 .user-card-frame {
   border-radius: 25px;
-  padding: 10px;
+  padding: 10px 0px;
   width: 230px;
   margin: 10px;
   background: #D3D3D3;
-  color: #000000
+  color: #000000;
+  text-align: center;
 }
 
 .center-text {
@@ -38,10 +39,31 @@ body {
 .not_current-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  /* background: #FFFFE0;
+  margin: 3rem;
+  border-radius: 25px;
+  padding: 1rem; */
+
 }
 
 .current-container{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  /* background: #FFFFE0;
+  margin: 3rem;
+  border-radius: 25px;
+padding: 1rem; */
+}
 
+
+.item-image {
+  width: 230px;
+  margin: auto;
+}
+
+.user-image {
+  width: 230px;
+  margin: auto;
 }

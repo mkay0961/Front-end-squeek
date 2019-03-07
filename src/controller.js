@@ -117,14 +117,21 @@ class Controller{
     return div
   }
   renderUser(user){
-    let h1 = document.createElement("h1")
+    let h1 = document.createElement("h2")
     let divCard = document.createElement("div")
     divCard.addEventListener('click',()=>{this.specificUser(user)})
     divCard.className = "user-card"
     let divCardFrame = document.createElement("div")
     divCardFrame.className = "user-card-frame"
-    h1.innerText = user.first + " " + user.last
+    h1.innerText = `${user.first}  ${user.last}`.replace(/\b\w/g, l => l.toUpperCase())
     divCardFrame.appendChild(h1)
+    let image = document.createElement('img')
+    image.src = `https://static01.nyt.com/images/2011/11/13/magazine/13duck/13duck-jumbo.jpg`
+    image.className = "user-image"
+    divCardFrame.appendChild(image)
+    let h3 = document.createElement("p")
+    h3.innerText = `${user.items.length} item(s)`
+    divCardFrame.appendChild(h3)
     divCard.appendChild(divCardFrame)
     let div = this.createUserDiv()
     div.appendChild(divCard)
@@ -146,14 +153,15 @@ class Controller{
     let current = this.createCurrentBox(user)
     // div.appendChild(h1)
     div.appendChild(current)
-
     this.getBody().appendChild(div)
   }
   createCurrentBox(user){
     let box = document.createElement("div")
-    let current = document.createElement("h5")
+    let current = document.createElement("h3")
+    current.className = "center-text"
     current.innerText = "Current Items"
-    let notcurrent = document.createElement("h5")
+    let notcurrent = document.createElement("h3")
+    notcurrent.className = "center-text"
     notcurrent.innerText = "Past Items"
     let ulc = document.createElement("div")
     let ulnc = document.createElement("div")
@@ -161,6 +169,7 @@ class Controller{
     notcurrent.appendChild(ulnc)
     box.appendChild(current)
     box.appendChild(notcurrent)
+
 
     user.items.forEach((item)=>{
       console.log(user);
@@ -171,8 +180,15 @@ class Controller{
         let divCardFrame = document.createElement("div")
         divCardFrame.className = "user-card-frame"
         let name = document.createElement("p")
-        name.innerText = `${item.name}` //capitalizes name
+        name.innerText = `${item.name.replace(/\b\w/g, l => l.toUpperCase())}`
+        let price = document.createElement("p")
+        price.innerText = `$${item.price.toFixed(2)}`
+        let image = document.createElement('img')
+        image.src = "https://cdn5.vectorstock.com/i/1000x1000/18/34/shampoo-and-soap-flat-icon-on-white-background-vector-13621834.jpg"
+        image.className = "item-image"
         divCardFrame.appendChild(name)
+        divCardFrame.appendChild(image)
+        divCardFrame.appendChild(price)
         divCard.appendChild(divCardFrame)
       if (user.id === (localStorage.id/7)) {
 
@@ -204,14 +220,20 @@ class Controller{
         let divCardFrame = document.createElement("div")
         divCardFrame.className = "user-card-frame"
         let name = document.createElement("p")
-        name.innerText = `${item.name}` //capitalizes name
+        name.innerText = `${item.name.replace(/\b\w/g, l => l.toUpperCase())}`
+        let price = document.createElement("p")
+        price.innerText = `$${item.price.toFixed(2)}`
+        let image = document.createElement('img')
+        image.src = "https://cdn5.vectorstock.com/i/1000x1000/18/34/shampoo-and-soap-flat-icon-on-white-background-vector-13621834.jpg"
+        image.className = "item-image"
         divCardFrame.appendChild(name)
+        divCardFrame.appendChild(image)
+        divCardFrame.appendChild(price)
         divCardFrame.appendChild(divCard)
 
       if (user.id === (localStorage.id/7)) {
 
         let button = document.createElement("button")
-        // button.id = `del-item-${item.item_id}`
         button.addEventListener('click', ()=>{
           this.deleteItem(user.id, item.item_id).bind(this)
         })
@@ -253,8 +275,15 @@ class Controller{
     divCardFrame.className = "user-card-frame"
     name.innerText = item.name.replace(/\b\w/g, l => l.toUpperCase()) //capitalizes name
     price.innerText = "$"+item.price.toFixed(2) //rounds to second decimal
+    let image = document.createElement('img')
+    image.src = "https://cdn5.vectorstock.com/i/1000x1000/18/34/shampoo-and-soap-flat-icon-on-white-background-vector-13621834.jpg"
+    image.className = "item-image"
     divCardFrame.appendChild(name)
+    divCardFrame.appendChild(image)
     divCardFrame.appendChild(price)
+    let h3 = document.createElement("p")
+    h3.innerText = `${item.user.length} review(s)`
+    divCardFrame.appendChild(h3)
     divCard.appendChild(divCardFrame)
     let div = this.createUserDiv()
     if (!item.user.length) {
