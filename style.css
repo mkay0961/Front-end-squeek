@@ -36,7 +36,7 @@ body {
 .center-text {
   text-align: center;
 }
-.not_current-container {
+.not-current-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -76,5 +76,9 @@ margin-left: 21px;
 }
 
 #register_btn {
+  margin-left: 15px;
+}
+
+#item-form {
   margin-left: 15px;
 }

@@ -169,11 +169,7 @@ class Controller{
     notcurrent.appendChild(ulnc)
     box.appendChild(current)
     box.appendChild(notcurrent)
-
-
     user.items.forEach((item)=>{
-      console.log(user);
-      // debugger
       if(item.current === "true"){
         let divCard = document.createElement("div")
         divCard.className = "user-card"
@@ -189,7 +185,7 @@ class Controller{
         divCardFrame.appendChild(name)
         divCardFrame.appendChild(image)
         divCardFrame.appendChild(price)
-        divCard.appendChild(divCardFrame)
+        divCardFrame.appendChild(divCard)
       if (user.id === (localStorage.id/7)) {
 
         let current = document.createElement("input")
@@ -250,7 +246,7 @@ class Controller{
         divCardFrame.appendChild(linebreak);
         divCardFrame.appendChild(button)
       }
-      ulnc.className ="not_current-container"
+      ulnc.className ="not-current-container"
       ulc.className ="current-container"
       ulnc.appendChild(divCardFrame)
       }
@@ -260,7 +256,7 @@ class Controller{
   }
 
   // filterDove(){
-  //   this.getBody().querySelectorAll('.user-card-frame').forEach((div)=>{
+  //   this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{
   //     if (!div.children[0].innerText.includes("Dove"))
   //     {div.style.display = "none"}})
   // }
@@ -324,9 +320,28 @@ class Controller{
     this.getBody().innerText = ""
     this.getBody().innerHTML =
       `<form id="item-form">
-        <input id="name" type="text" placeholder="Item Name" value=""/>
-        <input id="price" type="text" placeholder="Item Price" value=""/>
-        <textarea id="review" placeholder="Review" type="text"></textarea>
+      <label>Item</label><br>
+        <input id="name" type="text" placeholder="Item Name" value=""/><br><br>
+        <label>Price</label><br>
+        <input id="price" type="text" placeholder="Item Price" value=""/><br><br>
+        <label>Write a Review</label><br>
+        <textarea id="review" placeholder="Review" type="text"></textarea><br><br>
+        <label>Select Relevant Attributes</label><br>
+        <select multiple id="keywords">
+           <option value="curly">Curly Hair</option>
+           <option value="straight">Straight Hair</option>
+           <option value="wavy">Wavy Hair</option>
+           <option value="dryskin">Dry Skin</option>
+           <option value="acne">Acne Prone Skin</option>
+           <option value="oilyskin">Oily Skin</option>
+           <option value="combo">Combination Skin</option>
+           <option value="normalskin">Normal Skin</option>
+           <option value="thin">Thin Hair</option>
+           <option value="thick">Thick Hair</option>
+           <option value="normalhair">Normal Hair</option>
+           <option value="oilyskin">Oily Hair</option>
+           <option value="dryhair">Dry Hair</option>
+        </select><br><br>
         <input id="add_item_btn" type="submit" value="Add Review" class="btn btn-outline-success"/>
       </form>`
     document.getElementById('item-form').addEventListener('submit',(e)=>{ this.newItem(e, user_id)})
@@ -336,10 +351,25 @@ class Controller{
     let name = document.getElementById('name').value
     let price = document.getElementById('price').value
     let review = document.getElementById('review').value
+    let keywords =  document.getElementById('keywords').selectedOptions
     let data = this.itemAdapter.createOne({name: name, price: price, review: review, user_id: user_id})
-    data.then(()=>this.renderProfile())
+    data.then((json)=>{this.updateItemKeywords(json, keywords);
+    this.renderProfile()})
   }
 
+  updateItemKeywords(json, keywords) {
+
+    let item_id = json.id
+    let keywordsarray = Array.from(keywords).map((option)=>option.value)
+    let data = {keywords: keywordsarray.join(" ")}
+    let promise = this.itemAdapter.editItem(item_id, data)
+    promise.then((json)=>{console.log(json)})
+    // Array.from(keywords).forEach((option)=>Item.find(item_id).dataset.keywords << option.value))
+
+
+    // item.dataset.keywords << dropdown attributes
+    // patch item.keywords add string
+  }
   deleteItem(userId, itemId){
     let promise = this.userAdapter.deleteItem(userId, itemId)
     promise.then(()=>{this.renderProfile()})
