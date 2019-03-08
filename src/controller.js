@@ -39,11 +39,14 @@ class Controller{
   }
   loginPage(){
     this.getBody().innerText = ""
-    this.getBody().innerHTML =
+    let div = document.createElement('div')
+    div.className = "login-div"
+    this.getBody().appendChild(div)
+    div.innerHTML =
       `<form id="login-form">
           <input id="userName" type="text" placeholder="Enter Username" /><br><br>
-          <input id="login_btn" type="submit" value="Login" class="btn btn-outline-light"/>
-          <input id="register_btn" type="submit"value="Register" class="btn btn-outline-success"/>
+          <input id="login_btn" type="submit" value="Login" class="btn btn-outline-warning"/>
+          <input id="register_btn" type="submit"value="Register" class="btn btn-outline-warning"/>
         </form>`
     document.getElementById('register_btn').addEventListener('click', this.registerPage.bind(this))
     document.getElementById('login_btn').addEventListener('click',this.store.bind(this))
@@ -208,7 +211,10 @@ class Controller{
         divCardFrame.appendChild(current)
         let linebreak = document.createElement("br");
         divCardFrame.appendChild(linebreak);
-        divCardFrame.appendChild(button)
+        // divCardFrame.appendChild(linebreak);
+        let d = document.createElement('div')
+        d.appendChild(button)
+        divCardFrame.appendChild(d)
 
       }
         ulc.appendChild(divCardFrame)}
@@ -246,7 +252,9 @@ class Controller{
         divCardFrame.appendChild(current)
         let linebreak = document.createElement("br");
         divCardFrame.appendChild(linebreak);
-        divCardFrame.appendChild(button)
+        let d = document.createElement('div')
+        d.appendChild(button)
+        divCardFrame.appendChild(d)
       }
       ulnc.appendChild(divCardFrame)
       }

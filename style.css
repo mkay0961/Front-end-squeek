@@ -1,18 +1,14 @@
 html, body {min-height: 100%;}
 body {
-  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-    sans-serif;
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande',
+    'sans-serif';
   font-weight: 300;
-
-  background-image: url("https://us.123rf.com/450wm/monticello/monticello1708/monticello170800239/84490130-plastic-bottles-of-body-care-and-beauty-products-.jpg?ver=6");
-  background-color: #cccccc;
-
+  background-image: url('./circle-clean-clear-220211.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   background-attachment: fixed;
-
 }
 
 #profile-btn {
@@ -30,39 +26,56 @@ body {
 }
 
 .user-card {
-  float: left;
   width: 250px;
+  opacity: 0.92;
   margin: auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+    overflow: auto;
 }
 .user-card-frame {
+  border: 5px solid #0c4f89;
+
   border-radius: 25px;
   padding: 10px 0px;
   width: 230px;
   margin: 10px;
-  background: #D3D3D3;
+  background: #eabc3c;
+  opacity: 0.92;
+
   color: #000000;
   text-align: center;
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+    overflow: auto;
 }
 
 .item-card {
-  float: left;
-  width: 250px;
+  width: 310px;
   margin: auto;
+    overflow: auto;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .item-card-frame {
+  border: 5px solid #0c4f89;
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
-
   justify-content: center;
-
   border-radius: 25px;
   padding: 10px 0px;
-  width: 230px;
+  width: 300px;
   margin: 10px;
-  background: #D3D3D3;
-  color: #000000;
+  background: #eabc3c;
+  opacity: 0.92;
   text-align: center;
+    overflow: auto;
 }
 label {
     background: lightblue;
@@ -80,30 +93,27 @@ label {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* background: #FFFFE0;
-  margin: 3rem;
-  border-radius: 25px;
-  padding: 1rem; */
 }
 
 .current-container{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* background: #FFFFE0;
-  margin: 3rem;
-  border-radius: 25px;
-padding: 1rem; */
 }
 
 .item-image {
   width: 230px;
   margin: auto;
+  border-radius: 10px;
+  opacity: 1;
+
 }
 
 .user-image {
   width: 230px;
   margin: auto;
+  border-radius: 10px;
+  opacity: 1;
 }
 
 #userName {
@@ -116,14 +126,14 @@ margin-left: 21px;
 }
 .h1, h1 {
     font-size: 2.5rem;
-    color: white;
+    color: black;
+    text-align: center;
 }
 
 .h3, h3 {
     font-size: 1.75rem;
     color: black;
-    background: lightblue;
-    opacity: 0.5;
+    opacity: 0.8;
     filter: alpha(opacity=50);
 }
 
@@ -131,7 +141,6 @@ margin-left: 21px;
 ul {
     display: list-item;
     text-align: -webkit-match-parent;
-    background: lightblue;
     opacity: 0.5;
     filter: alpha(opacity=50);
 
@@ -147,4 +156,22 @@ li{
 
 #item-form {
   margin-left: 15px;
+}
+
+.login-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: #0c4f89;
+  opacity: 0.92;
+  padding: 2rem 8rem;
+  margin-left: 42.5%;
+  margin-right: 50%;
+  border-radius: 25px;
+}
+
+input[type=text] {
+  border: 2px solid #eabc3c;
+  border-radius: 4px;
+  text-align: center;
 }
