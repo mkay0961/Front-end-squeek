@@ -103,14 +103,16 @@ label {
   margin: auto;
   border-radius: 10px;
   opacity: 1;
-
+  border: 2px solid #0c4f89;
 }
 
 .user-image {
-  width: 230px;
+  width: 200px;
   margin: auto;
   border-radius: 10px;
   opacity: 1;
+  border: 2px solid #0c4f89;
+
 }
 
 #userName {
@@ -152,6 +154,7 @@ ul {
 
 #item-form label{
 color: white;
+margin-top: 10px;
 font-weight: bold;
 width: -moz-max-content;
 
@@ -200,8 +203,7 @@ flex-wrap: wrap;
   margin-right: 50%;
   border-radius: 25px;
   padding: 10px 40px;
-  overflow: auto;
-
+text-align: center;
 }
 
 ul {  list-style: none;
@@ -254,7 +256,7 @@ color: white;
 }
 
 .item-header {
-  color: white;
+  margin: 25px;
 }
 
 textarea { border: 2px solid #eabc3c;

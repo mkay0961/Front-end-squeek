@@ -156,7 +156,7 @@ class Controller{
     h1.innerText = user.first + " " + user.last
     if (user.id === (localStorage.id/7)) {
       let button = document.createElement('button')
-      button.className = "btn btn-outline-light"
+      button.className = "btn btn-outline-warning"
       button.addEventListener('click',()=>{this.itemForm(user.id)})
       button.innerText = "Add Item"
       topDiv.appendChild(button)
@@ -309,10 +309,10 @@ filter.innerHTML =
       <option value="flat">Flat Hair</option>
       <option value="damaged">Damaged Hair</option>
       <option value="voluminous">Voluminous Hair</option>
-      <option value="oilyskin">Oily Hair</option>
+      <option value="oilyhair">Oily Hair</option>
       <option value="dryhair">Dry Hair</option>
     </select>
-    <input id="filter_btn" type="submit" value="Filter" class="btn btn-outline-primary"/>
+    <input style="margin-left:15px; padding: 0px 7px;" id="filter_btn" type="submit" value="Filter" class="btn btn-outline-warning"/>
   </form><br><br>`
   document.getElementById('filter-body').appendChild(filter)
 
