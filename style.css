@@ -150,6 +150,13 @@ ul {
   margin-left: 15px;
 }
 
+#item-form label{
+color: white;
+font-weight: bold;
+width: -moz-max-content;
+
+}
+
 .login-div {
   margin: auto;
   justify-content: center;
@@ -244,4 +251,8 @@ color: white;
 
 .items-container {
   display: inline-flex;
+}
+
+.item-header {
+  color: white;
 }

@@ -169,10 +169,10 @@ class Controller{
   createCurrentBox(user){
     let box = document.createElement("div")
     let currentItems = document.createElement("h3")
-    currentItems.className = "center-text"
+    currentItems.className = "center-text item-header"
     currentItems.innerText = "Current Items"
     let notcurrent = document.createElement("h3")
-    notcurrent.className = "center-text"
+    notcurrent.className = "center-text item-header"
     notcurrent.innerText = "Past Items"
     let ulc = document.createElement("div")
     let ulnc = document.createElement("div")
@@ -274,13 +274,13 @@ class Controller{
   filterDove(e){
     e.preventDefault()
     if (document.getElementById('filter_btn').value === "Filter Off") {
-      this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{div.style.display = "block"})
+      this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{div.parentElement.parentElement.style.display = "block"})
       document.getElementById('filter_btn').value = "Filter"
     } else {
     let attribute = document.getElementById('filter-select').selectedOptions[0].value;
     this.getBody().querySelectorAll('.item-card-frame').forEach((div)=>{
       if (!div.dataset.keywords.includes(attribute)) {
-        div.style.display = "none";
+        div.parentElement.parentElement.style.display = "none";
         document.getElementById('filter_btn').value = "Filter Off"
       }})
     }
