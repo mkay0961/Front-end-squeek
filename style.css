@@ -67,7 +67,7 @@ body {
   justify-content: center;
   border-radius: 25px;
   padding: 10px 0px;
-  width: 300px;
+  width: 315px;
   margin: 10px;
   background: #eabc3c;
   opacity: 0.92;
@@ -104,6 +104,7 @@ label {
   border-radius: 10px;
   opacity: 1;
   border: 2px solid #0c4f89;
+  margin-bottom: 10px;
 }
 
 .user-image {
