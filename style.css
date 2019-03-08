@@ -256,3 +256,12 @@ color: white;
 .item-header {
   color: white;
 }
+
+textarea { border: 2px solid #eabc3c;
+border-radius: 4px;}
+
+select {
+  border: 2px solid #eabc3c;
+border-radius: 4px;
+margin-bottom: 10px;
+}
