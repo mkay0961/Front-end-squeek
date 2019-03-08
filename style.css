@@ -78,7 +78,6 @@ body {
     overflow: auto;
 }
 label {
-    background: lightblue;
     display: inline-block;
     margin-bottom: .5rem;
     color: black;
@@ -133,7 +132,7 @@ margin-left: 21px;
 .h3, h3 {
     font-size: 1.75rem;
     color: black;
-    opacity: 0.8;
+    opacity: 0.92;
     filter: alpha(opacity=50);
 }
 
