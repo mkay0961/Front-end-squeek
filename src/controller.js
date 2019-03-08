@@ -38,6 +38,7 @@ class Controller{
       this.renderProfile()}
   }
   loginPage(){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
     let div = document.createElement('div')
     div.className = "login-div"
@@ -86,6 +87,7 @@ class Controller{
 
   // register stuff
   registerPage(){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
     this.getBody().innerHTML =
       `<form id="register-form">
@@ -105,12 +107,14 @@ class Controller{
 
   // render user stuff
   renderProfile(){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
     let id = (parseInt(localStorage.getItem('id'))/7)
     let promise = this.userAdapter.getOne(id)
     promise.then((user)=> {this.specificUser(user)})
   }
   handleArray(array){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
     array.forEach(this.renderUser.bind(this))
   }
@@ -141,17 +145,21 @@ class Controller{
     this.getBody().appendChild(div)
   }
   specificUser(user){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
     let h1 = document.createElement("h1")
     let div = this.createUserDiv()
-    div.appendChild(h1)
+    let topDiv = document.createElement('div')
+    topDiv.className = "thing"
+    topDiv.appendChild(h1)
+    div.appendChild(topDiv)
     h1.innerText = user.first + " " + user.last
     if (user.id === (localStorage.id/7)) {
       let button = document.createElement('button')
       button.className = "btn btn-outline-light"
       button.addEventListener('click',()=>{this.itemForm(user.id)})
       button.innerText = "Add Item"
-      div.appendChild(button)
+      topDiv.appendChild(button)
     }
     let current = this.createCurrentBox(user)
     // div.appendChild(h1)
@@ -280,8 +288,10 @@ class Controller{
 
   //render item stuff
   handleItems(array){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
 let filter = document.createElement('div')
+filter.className = "filter-div"
 filter.innerHTML =
 `<form id="filter-form">
     <select id="filter-select">
@@ -304,7 +314,9 @@ filter.innerHTML =
     </select>
     <input id="filter_btn" type="submit" value="Filter" class="btn btn-outline-primary"/>
   </form><br><br>`
-  this.getBody().appendChild(filter)
+  document.getElementById('filter-body').appendChild(filter)
+
+
     filter.addEventListener('submit', (e)=>this.filterDove(e).bind(this))
     // this.getBody().appendChild(filter)
     array.forEach(this.renderItems.bind(this))
@@ -330,21 +342,37 @@ filter.innerHTML =
     h3.innerText = `${item.user.length} review(s)`
     divCardFrame.appendChild(h3)
     divCard.appendChild(divCardFrame)
-    let div = this.createUserDiv()
+    let div = document.createElement('div')
+    div.className = "items-container"
     if (!item.user.length) {
       divCard.style.display = "none"}
     div.appendChild(divCard)
-    this.getBody().appendChild(div)
+    let itemContainer = document.createElement('div')
+    itemContainer.className = "item-container"
+    itemContainer.appendChild(div)
+    this.getBody().appendChild(itemContainer)
+
   }
   specificItem(item){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
-    let name = document.createElement("h1")
+    let name = document.createElement("h2")
     name.innerText = item.name.replace(/\b\w/g, l => l.toUpperCase())
-    let price = document.createElement("h1")
+    let price = document.createElement("h2")
     price.innerText = "$"+item.price.toFixed(2)
-    let div = this.createUserDiv()
+    let image = document.createElement('img')
+    image.src = item.image
+    image.className = "item-image"
+    let div = document.createElement('div')
+    div.className = "specific-item"
     div.appendChild(name)
     div.appendChild(price)
+    div.appendChild(image)
+    let label = document.createElement('div')
+    label.innerHTML = "Reviews<br><br>"
+
+    div.appendChild(label)
+
     if (item.user.length) {
       let ul = document.createElement('ul')
       item.user.forEach((user)=>{
@@ -357,16 +385,19 @@ filter.innerHTML =
     this.getBody().appendChild(div)
   }
   itemForm(user_id){
+    document.getElementById('filter-body').innerText = ""
     this.getBody().innerText = ""
     this.getBody().innerHTML =
       `<form id="item-form">
-      <label class= "badge badge-secondary">Item</label><br>
-        <input id="name" type="text" placeholder="Item Name" value=""/><br><br>
-        <label class= "badge badge-secondary">Price</label><br>
+      <label>Item</label><br>
+        <input style="font color: 'white';" id="name" type="text" placeholder="Item Name" value=""/><br><br>
+        <label>Price</label><br>
         <input id="price" type="text" placeholder="Item Price" value=""/><br><br>
-        <label class= "badge badge-secondary">Write a Review</label><br>
+        <label>Image Url</label><br>
+        <input id="image_url" type="text" placeholder="Image Url" value=""/><br><br>
+        <label>Write a Review</label><br>
         <textarea id="review" placeholder="Review" type="text"></textarea><br><br>
-        <label class= "badge badge-secondary">Select Relevant Attributes</label><br>
+        <label>Select Relevant Attributes</label><br>
         <select multiple id="keywords">
            <option value="curly">Curly Hair</option>
            <option value="straight">Straight Hair</option>
@@ -393,9 +424,10 @@ filter.innerHTML =
     e.preventDefault()
     let name = document.getElementById('name').value
     let price = document.getElementById('price').value
+    let image = document.getElementById('image_url').value
     let review = document.getElementById('review').value
     let keywords =  document.getElementById('keywords').selectedOptions
-    let data = this.itemAdapter.createOne({name: name, price: price, review: review, user_id: user_id})
+    let data = this.itemAdapter.createOne({name: name, price: price, image: image, review: review, user_id: user_id})
     data.then((json)=>{this.updateItemKeywords(json, keywords);
     this.renderProfile()})
   }
@@ -414,7 +446,6 @@ filter.innerHTML =
     let promise = this.userAdapter.deleteItem(userId, itemId)
     promise.then(()=>{this.renderProfile()})
   }
-
   fetchCheck(item_id, user_id, current){
       let new_current = !JSON.parse(current)
       let promise = this.userAdapter.editCurrent(item_id,user_id,new_current)
