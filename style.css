@@ -37,17 +37,14 @@ body {
 }
 .user-card-frame {
   border: 5px solid #0c4f89;
-
   border-radius: 25px;
   padding: 10px 0px;
   width: 230px;
   margin: 10px;
   background: #eabc3c;
   opacity: 0.92;
-
   color: #000000;
   text-align: center;
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
     overflow: auto;
@@ -65,7 +62,6 @@ body {
 .item-card-frame {
   border: 5px solid #0c4f89;
   text-align: center;
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   border-radius: 25px;
@@ -173,4 +169,9 @@ input[type=text] {
   border: 2px solid #eabc3c;
   border-radius: 4px;
   text-align: center;
+}
+
+#whole-body {
+display: flex;
+flex-wrap: wrap;
 }
