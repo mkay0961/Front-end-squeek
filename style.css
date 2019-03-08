@@ -179,6 +179,7 @@ input[type=text] {
 #whole-body {
 display: flex;
 flex-wrap: wrap;
+justify-content: center;
 }
 
 #item-form {
