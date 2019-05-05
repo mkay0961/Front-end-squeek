@@ -1,5 +1,7 @@
 This app is designed to help keep track of your hygiene products and find new ones based on specific body features
 
+DEMO: https://youtu.be/RuQ4b7IVHcM
+
 This frontend is built in React.
 
 This frontend interface calls the API and that lets a user view, add, update, and delete their hygiene products
