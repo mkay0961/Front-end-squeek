@@ -1,6 +1,6 @@
 This app is designed to help keep track of your hygiene products and find new ones based on specific body features
 
-This application is built in React.
+This frontend is built in React.
 
 The backend can be found at https://github.com/mkay0961/squeek
 
